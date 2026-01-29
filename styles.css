@@ -150,12 +150,21 @@ h1 {
 }
 
 .timeline__ticks {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   font-size: 11px;
   color: var(--rail);
   padding: 0 2px;
+  min-height: 18px;
+}
+
+.timeline__tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 @media (max-width: 720px) {
