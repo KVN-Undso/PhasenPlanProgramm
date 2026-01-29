@@ -1,6 +1,7 @@
 const startInput = document.querySelector("#start-date");
 const endInput = document.querySelector("#end-date");
 const ticksContainer = document.querySelector(".timeline__ticks");
+const minorTicksContainer = document.querySelector(".timeline__minor");
 
 const formatShortDate = (date) => {
   if (!date || Number.isNaN(date.getTime())) return "";
@@ -30,6 +31,7 @@ const parseInputDate = (value) => {
 
 const renderTicks = () => {
   ticksContainer.innerHTML = "";
+  minorTicksContainer.innerHTML = "";
   const startDate = parseInputDate(startInput.value);
   const endDate = parseInputDate(endInput.value);
 
@@ -58,6 +60,19 @@ const renderTicks = () => {
     const label = document.createElement("span");
     label.textContent = formatShortDate(tick);
     ticksContainer.appendChild(label);
+  });
+
+  const totalSpan = endDate.getTime() - startDate.getTime();
+  if (totalSpan <= 0) return;
+
+  uniqueTicks.forEach((tick) => {
+    if (tick <= startDate || tick >= endDate) return;
+    const position =
+      ((tick.getTime() - startDate.getTime()) / totalSpan) * 100;
+    const mark = document.createElement("span");
+    mark.className = "timeline__minor-tick";
+    mark.style.left = `${position}%`;
+    minorTicksContainer.appendChild(mark);
   });
 };
 

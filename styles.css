@@ -116,6 +116,21 @@ h1 {
   transform: translateY(-50%);
 }
 
+.timeline__minor {
+  position: absolute;
+  inset: 0;
+}
+
+.timeline__minor-tick {
+  position: absolute;
+  top: 50%;
+  width: 4px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--rail);
+  transform: translate(-50%, -50%);
+}
+
 .timeline__cap {
   position: absolute;
   top: 50%;
