@@ -19,18 +19,24 @@
         <div class="date-controls">
           <label class="date-control">
             <span>Beginn</span>
-            <input type="text" placeholder="TT.MM.JJJJ" />
+            <input type="text" id="start-date" placeholder="TT.MM.JJJJ" />
           </label>
           <label class="date-control">
             <span>Ende</span>
-            <input type="text" placeholder="TT.MM.JJJJ" />
+            <input type="text" id="end-date" placeholder="TT.MM.JJJJ" />
           </label>
         </div>
       </header>
 
       <section class="timeline" aria-label="Zeitstrahl">
-        <div class="timeline__rail"></div>
+        <div class="timeline__track">
+          <div class="timeline__rail"></div>
+          <div class="timeline__cap timeline__cap--start"></div>
+          <div class="timeline__cap timeline__cap--end"></div>
+        </div>
+        <div class="timeline__ticks" aria-hidden="true"></div>
       </section>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
