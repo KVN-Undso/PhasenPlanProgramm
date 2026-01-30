@@ -69,20 +69,21 @@ const renderTicks = () => {
   const totalSpan = endDate.getTime() - startDate.getTime();
   if (totalSpan <= 0) return;
 
-  uniqueTicks.forEach((tick) => {
+  const step =
+    uniqueTicks.length > 1 ? 100 / (uniqueTicks.length - 1) : 0;
+
+  uniqueTicks.forEach((tick, index) => {
     const label = document.createElement("span");
     label.className = "timeline__tick";
     label.textContent = formatShortDate(tick);
-    const position =
-      ((tick.getTime() - startDate.getTime()) / totalSpan) * 100;
+    const position = index * step;
     label.style.left = `${position}%`;
     ticksContainer.appendChild(label);
   });
 
-  uniqueTicks.forEach((tick) => {
+  uniqueTicks.forEach((tick, index) => {
     if (tick <= startDate || tick >= endDate) return;
-    const position =
-      ((tick.getTime() - startDate.getTime()) / totalSpan) * 100;
+    const position = index * step;
     const mark = document.createElement("span");
     mark.className = "timeline__minor-tick";
     mark.style.left = `${position}%`;
