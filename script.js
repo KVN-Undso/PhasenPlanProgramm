@@ -4,6 +4,7 @@ const ticksContainer = document.querySelector(".timeline__ticks");
 const minorTicksContainer = document.querySelector(".timeline__minor");
 const track = document.querySelector(".timeline__track");
 const tooltip = document.querySelector(".timeline__tooltip");
+const actionPanel = document.querySelector(".action-panel");
 
 const formatShortDate = (date) => {
   if (!date || Number.isNaN(date.getTime())) return "";
@@ -119,3 +120,8 @@ const hideTooltip = () => {
 
 track.addEventListener("mousemove", updateTooltip);
 track.addEventListener("mouseleave", hideTooltip);
+
+track.addEventListener("click", () => {
+  actionPanel.classList.add("is-visible");
+  actionPanel.setAttribute("aria-hidden", "false");
+});

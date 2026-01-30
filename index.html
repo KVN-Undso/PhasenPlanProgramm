@@ -8,36 +8,51 @@
   </head>
   <body>
     <main class="card">
-      <header class="card__header">
-        <div>
-          <p class="eyebrow">Phasen Programm</p>
-          <h1>Projekt-Zeitstrahl</h1>
-          <p class="subtitle">
-            Definiere den Zeitraum und starte mit dem Phasenplan.
-          </p>
-        </div>
-        <div class="date-controls">
-          <label class="date-control">
-            <span>Beginn</span>
-            <input type="text" id="start-date" placeholder="TT.MM.JJJJ" />
-          </label>
-          <label class="date-control">
-            <span>Ende</span>
-            <input type="text" id="end-date" placeholder="TT.MM.JJJJ" />
-          </label>
-        </div>
-      </header>
+      <div class="card__surface">
+        <header class="card__header">
+          <div>
+            <p class="eyebrow">Phasen Programm</p>
+            <h1>Projekt-Zeitstrahl</h1>
+            <p class="subtitle">
+              Definiere den Zeitraum und starte mit dem Phasenplan.
+            </p>
+          </div>
+          <div class="date-controls">
+            <label class="date-control">
+              <span>Beginn</span>
+              <input type="text" id="start-date" placeholder="TT.MM.JJJJ" />
+            </label>
+            <label class="date-control">
+              <span>Ende</span>
+              <input type="text" id="end-date" placeholder="TT.MM.JJJJ" />
+            </label>
+          </div>
+        </header>
 
-      <section class="timeline" aria-label="Zeitstrahl">
-        <div class="timeline__track">
-          <div class="timeline__rail"></div>
-          <div class="timeline__minor" aria-hidden="true"></div>
-          <div class="timeline__cap timeline__cap--start"></div>
-          <div class="timeline__cap timeline__cap--end"></div>
-          <div class="timeline__tooltip" role="status" aria-hidden="true"></div>
-        </div>
-        <div class="timeline__ticks" aria-hidden="true"></div>
-      </section>
+        <section class="timeline" aria-label="Zeitstrahl">
+          <div class="timeline__track">
+            <div class="timeline__rail"></div>
+            <div class="timeline__minor" aria-hidden="true"></div>
+            <div class="timeline__cap timeline__cap--start"></div>
+            <div class="timeline__cap timeline__cap--end"></div>
+            <div
+              class="timeline__tooltip"
+              role="status"
+              aria-hidden="true"
+            ></div>
+          </div>
+          <div class="timeline__ticks" aria-hidden="true"></div>
+        </section>
+      </div>
+      <aside class="action-panel" aria-hidden="true">
+        <button class="action-panel__button" type="button">
+          Ereigniss (Einzelnd)
+        </button>
+        <button class="action-panel__button" type="button">
+          Ereigniss (Gruppe)
+        </button>
+        <button class="action-panel__button" type="button">Phase</button>
+      </aside>
     </main>
     <script src="script.js"></script>
   </body>
