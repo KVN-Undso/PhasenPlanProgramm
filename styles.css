@@ -46,14 +46,18 @@ body {
 .card__surface,
 .action-panel {
   position: relative;
-  z-index: 1;
+}
+
+.card__surface {
+  z-index: 2;
 }
 
 .action-panel {
   position: absolute;
   top: 50%;
-  right: -120px;
-  transform: translateY(-50%) translateX(32px);
+  right: -36px;
+  transform: translateY(-50%) translateX(60px);
+  z-index: 0;
   width: 220px;
   padding: 32px 24px;
   border-radius: 26px;
