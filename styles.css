@@ -55,8 +55,8 @@ body {
 .action-panel {
   position: absolute;
   top: 50%;
-  right: -180px;
-  transform: translateY(-50%) translateX(120px);
+  right: -230px;
+  transform: translateY(-50%) translateX(150px);
   z-index: 0;
   width: 220px;
   padding: 32px 24px;
