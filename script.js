@@ -2,12 +2,22 @@ const startInput = document.querySelector("#start-date");
 const endInput = document.querySelector("#end-date");
 const ticksContainer = document.querySelector(".timeline__ticks");
 const minorTicksContainer = document.querySelector(".timeline__minor");
+const track = document.querySelector(".timeline__track");
+const tooltip = document.querySelector(".timeline__tooltip");
 
 const formatShortDate = (date) => {
   if (!date || Number.isNaN(date.getTime())) return "";
   const day = String(date.getDate()).padStart(2, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const year = String(date.getFullYear()).slice(-2);
+  return `${day}.${month}.${year}`;
+};
+
+const formatLongDate = (date) => {
+  if (!date || Number.isNaN(date.getTime())) return "";
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
   return `${day}.${month}.${year}`;
 };
 
@@ -82,3 +92,35 @@ const renderTicks = () => {
 
 startInput.addEventListener("input", renderTicks);
 endInput.addEventListener("input", renderTicks);
+
+const updateTooltip = (event) => {
+  const startDate = parseInputDate(startInput.value);
+  const endDate = parseInputDate(endInput.value);
+  if (!startDate || !endDate || startDate > endDate) {
+    tooltip.classList.remove("is-visible");
+    tooltip.setAttribute("aria-hidden", "true");
+    return;
+  }
+
+  const rect = track.getBoundingClientRect();
+  const ratio = Math.min(
+    1,
+    Math.max(0, (event.clientX - rect.left) / rect.width)
+  );
+  const targetTime =
+    startDate.getTime() + ratio * (endDate.getTime() - startDate.getTime());
+  const targetDate = new Date(targetTime);
+
+  tooltip.textContent = formatLongDate(targetDate);
+  tooltip.style.left = `${ratio * 100}%`;
+  tooltip.classList.add("is-visible");
+  tooltip.setAttribute("aria-hidden", "false");
+};
+
+const hideTooltip = () => {
+  tooltip.classList.remove("is-visible");
+  tooltip.setAttribute("aria-hidden", "true");
+};
+
+track.addEventListener("mousemove", updateTooltip);
+track.addEventListener("mouseleave", hideTooltip);

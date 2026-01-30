@@ -131,6 +131,26 @@ h1 {
   transform: translate(-50%, -50%);
 }
 
+.timeline__tooltip {
+  position: absolute;
+  top: calc(50% + 18px);
+  left: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(17, 23, 41, 0.18);
+  font-size: 12px;
+  color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 0);
+  transition: opacity 0.15s ease;
+}
+
+.timeline__tooltip.is-visible {
+  opacity: 1;
+}
+
 .timeline__cap {
   position: absolute;
   top: 50%;
