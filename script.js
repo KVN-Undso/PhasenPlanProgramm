@@ -49,41 +49,35 @@ const renderTicks = () => {
     return;
   }
 
-  const ticks = [
-    startDate,
-    new Date(startDate.getFullYear(), startDate.getMonth() + 1, 1),
-    new Date(startDate.getFullYear(), startDate.getMonth() + 2, 1),
-    endDate,
-  ];
-
-  const uniqueTicks = ticks.filter(
-    (tick, index, list) =>
-      list.findIndex(
-        (item) =>
-          item.getFullYear() === tick.getFullYear() &&
-          item.getMonth() === tick.getMonth() &&
-          item.getDate() === tick.getDate()
-      ) === index
-  );
-
   const totalSpan = endDate.getTime() - startDate.getTime();
   if (totalSpan <= 0) return;
 
-  const step =
-    uniqueTicks.length > 1 ? 100 / (uniqueTicks.length - 1) : 0;
+  const monthTicks = [startDate];
+  const cursor = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 1);
+  while (cursor < endDate) {
+    monthTicks.push(new Date(cursor));
+    cursor.setMonth(cursor.getMonth() + 1);
+  }
+  if (
+    endDate.getTime() !== monthTicks[monthTicks.length - 1].getTime()
+  ) {
+    monthTicks.push(endDate);
+  }
 
-  uniqueTicks.forEach((tick, index) => {
+  monthTicks.forEach((tick) => {
     const label = document.createElement("span");
     label.className = "timeline__tick";
     label.textContent = formatShortDate(tick);
-    const position = index * step;
+    const position =
+      ((tick.getTime() - startDate.getTime()) / totalSpan) * 100;
     label.style.left = `${position}%`;
     ticksContainer.appendChild(label);
   });
 
-  uniqueTicks.forEach((tick, index) => {
+  monthTicks.forEach((tick) => {
     if (tick <= startDate || tick >= endDate) return;
-    const position = index * step;
+    const position =
+      ((tick.getTime() - startDate.getTime()) / totalSpan) * 100;
     const mark = document.createElement("span");
     mark.className = "timeline__minor-tick";
     mark.style.left = `${position}%`;
